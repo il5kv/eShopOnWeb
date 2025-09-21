@@ -10,8 +10,7 @@ stages:
   jobs:
   - job: Build
     pool:
-      name: eShopOnWebSelfPool
-      demands: Agent.Name -equals eShopOnWebSelfAgent
+      vmImage: ubuntu-latest
     steps:
     - task: DotNetCoreCLI@2
       displayName: Restore
