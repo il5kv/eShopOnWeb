@@ -9,7 +9,7 @@ variables:
   azureServiceConnection: 'azure subs'
   subscriptionId: 'abcc12e8-46f6-4fb0-ae1f-86a92dafdaa7'
   resourceGroup: 'rg-az400-container-danasoft'
-  location: 'centralus'
+  location: 'eastus'
 
 stages:
 - stage: Build
