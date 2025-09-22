@@ -19,6 +19,26 @@ stages:
       name: eShopOnWebSelfPool
       demands: Agent.Name -equals eShopOnWebSelfAgent
     steps:
+    # Install Docker on Windows (if not already installed)
+    - task: PowerShell@2
+      displayName: 'Install Docker'
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Check if Docker is already installed
+          $dockerInstalled = Get-Command docker -ErrorAction SilentlyContinue
+          if (-not $dockerInstalled) {
+            Write-Host "Docker not found. Installing Docker..."
+            # Download and install Docker for Windows
+            Invoke-WebRequest -Uri https://get.docker.com/ -OutFile docker-install.ps1
+            .\docker-install.ps1
+            # Add Docker to PATH (if it's not already in PATH)
+            $env:Path += ";C:\Program Files\Docker\Docker\Resources\bin"
+            Write-Host "Docker installation complete."
+          } else {
+            Write-Host "Docker is already installed."
+          }
+
     - task: AzureResourceManagerTemplateDeployment@3
       displayName: Deploy ACR using Bicep
       inputs:
