@@ -6,7 +6,7 @@ resources:
 variables:
   azureServiceConnection: 'azure subs'
   resourceGroup: 'rg-az400-container-danasoft'
-  location: 'westeurope'
+  location: 'centralus'
   subscriptionId: 'abcc12e8-46f6-4fb0-ae1f-86a92dafdaa7'
 
 stages:
@@ -14,8 +14,7 @@ stages:
   jobs:
   - job: Deploy
     pool:
-      name: eShopOnWebSelfPool
-      demands: Agent.Name -equals eShopOnWebSelfAgent
+      vmImage: ubuntu-latest
     steps:
     - task: AzureResourceManagerTemplateDeployment@3
       displayName: Deploy App Service using Bicep
