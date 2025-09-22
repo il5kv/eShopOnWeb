@@ -20,35 +20,21 @@ stages:
       demands: Agent.Name -equals eShopOnWebSelfAgent
     steps:
     # Install Docker on Windows (if not already installed)
-    - task: PowerShell@2
-      displayName: 'Install Docker on Windows'
+    - task: Bash@3
+      displayName: 'Install Docker using Bash'
       inputs:
         targetType: 'inline'
         script: |
           # Check if Docker is installed
-          $dockerInstalled = Get-Command docker -ErrorAction SilentlyContinue
-          if (-not $dockerInstalled) {
-              Write-Host "Docker not found. Installing Docker..."
-              
-              # Download Docker installation script
-              Invoke-WebRequest -Uri https://get.docker.com/ -OutFile docker-install.ps1
-              
-              # Modify the docker-install.ps1 script to handle PowerShell syntax
-              $scriptContent = Get-Content -Path docker-install.ps1
-    
-              # Fix the if conditions to use PowerShell syntax
-              $scriptContent = $scriptContent -replace 'if \[ -z', 'if ($null -eq'
-              $scriptContent = $scriptContent -replace '\]', ')'
-              
-              # Save the modified script
-              Set-Content -Path docker-install.ps1 -Value $scriptContent
-    
-              # Run the modified script
-              .\docker-install.ps1
-              Write-Host "Docker installation complete."
-          } else {
-              Write-Host "Docker is already installed."
-          }
+          if ! command -v docker &>/dev/null; then
+              echo "Docker not found. Installing Docker..."
+              # Download Docker installer for Windows and run it
+              curl -fsSL https://get.docker.com/ -o get-docker.sh
+              bash get-docker.sh
+              echo "Docker installation complete."
+          else
+              echo "Docker is already installed."
+          fi
 
     - task: AzureResourceManagerTemplateDeployment@3
       displayName: Deploy ACR using Bicep
