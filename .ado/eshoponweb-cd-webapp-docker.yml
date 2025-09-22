@@ -6,7 +6,7 @@ resources:
 variables:
   azureServiceConnection: 'azure subs'
   resourceGroup: 'rg-az400-container-danasoft'
-  location: 'eastus'
+  location: 'westeurope'
   subscriptionId: 'abcc12e8-46f6-4fb0-ae1f-86a92dafdaa7'
 
 stages:
