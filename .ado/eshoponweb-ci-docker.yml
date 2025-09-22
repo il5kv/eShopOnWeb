@@ -21,22 +21,33 @@ stages:
     steps:
     # Install Docker on Windows (if not already installed)
     - task: PowerShell@2
-      displayName: 'Install Docker'
+      displayName: 'Install Docker on Windows'
       inputs:
         targetType: 'inline'
         script: |
-          # Check if Docker is already installed
+          # Check if Docker is installed
           $dockerInstalled = Get-Command docker -ErrorAction SilentlyContinue
           if (-not $dockerInstalled) {
-            Write-Host "Docker not found. Installing Docker..."
-            # Download and install Docker for Windows
-            Invoke-WebRequest -Uri https://get.docker.com/ -OutFile docker-install.ps1
-            .\docker-install.ps1
-            # Add Docker to PATH (if it's not already in PATH)
-            $env:Path += ";C:\Program Files\Docker\Docker\Resources\bin"
-            Write-Host "Docker installation complete."
+              Write-Host "Docker not found. Installing Docker..."
+              
+              # Download Docker installation script
+              Invoke-WebRequest -Uri https://get.docker.com/ -OutFile docker-install.ps1
+              
+              # Modify the docker-install.ps1 script to handle PowerShell syntax
+              $scriptContent = Get-Content -Path docker-install.ps1
+    
+              # Fix the if conditions to use PowerShell syntax
+              $scriptContent = $scriptContent -replace 'if \[ -z', 'if ($null -eq'
+              $scriptContent = $scriptContent -replace '\]', ')'
+              
+              # Save the modified script
+              Set-Content -Path docker-install.ps1 -Value $scriptContent
+    
+              # Run the modified script
+              .\docker-install.ps1
+              Write-Host "Docker installation complete."
           } else {
-            Write-Host "Docker is already installed."
+              Write-Host "Docker is already installed."
           }
 
     - task: AzureResourceManagerTemplateDeployment@3
