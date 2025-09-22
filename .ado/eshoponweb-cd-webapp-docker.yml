@@ -1,5 +1,3 @@
-#NAME THE PIPELINE SAME AS FILE (WITHOUT ".yml")
-
 resources:
   repositories:
     - repository: self
@@ -7,16 +5,17 @@ resources:
 
 variables:
   azureServiceConnection: 'azure subs'
-  resourceGroup: 'rg-az400-container-NAME'
+  resourceGroup: 'rg-az400-container-danasoft'
   location: 'centralus'
-  subscriptionId: 'YOUR-SUBSCRIPTION-ID'
+  subscriptionId: 'abcc12e8-46f6-4fb0-ae1f-86a92dafdaa7'
 
 stages:
 - stage: Deploy
   jobs:
   - job: Deploy
     pool:
-      vmImage: ubuntu-latest
+      name: eShopOnWebSelfPool
+      demands: Agent.Name -equals eShopOnWebSelfAgent
     steps:
     - task: AzureResourceManagerTemplateDeployment@3
       displayName: Deploy App Service using Bicep
