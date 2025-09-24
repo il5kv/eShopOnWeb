@@ -28,7 +28,8 @@ stages:
   jobs:
   - job: Deploy
     pool:
-      vmImage: ubuntu-latest
+      name: eShopOnWebSelfPool
+      demands: Agent.Name -equals eShopOnWebSelfAgent
     steps:
     # Deploy Azure Container Instance using Bicep
     - task: AzureResourceManagerTemplateDeployment@3
