@@ -44,13 +44,19 @@ stages:
       inputs:
         command: 'test'
         projects: 'tests/IntegrationTests/*.csproj'
-        options: '--logger "console;verbosity=detailed"'
+
+    - task: DotNetCoreCLI@2
+      displayName: Restore Dependencies
+      inputs:
+          command: restore
+          projects: '**/*.csproj'
 
     - task: DotNetCoreCLI@2
       displayName: Functional Tests
       inputs:
         command: 'test'
         projects: 'tests/FunctionalTests/*.csproj'
+        options: '--logger "console;verbosity=detailed"'
     
     - task: DotNetCoreCLI@2
       displayName: Publish
