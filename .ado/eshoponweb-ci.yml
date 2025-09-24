@@ -40,10 +40,10 @@ stages:
         projects: 'tests/UnitTests/*.csproj'
 
     - task: DotNetCoreCLI@2
-      displayName: Functional Tests
+      displayName: Integration Tests
       inputs:
         command: 'test'
-        projects: 'tests/FunctionalTests/*.csproj'
+        projects: 'tests/IntegrationTests/*.csproj'
     
     - task: DotNetCoreCLI@2
       displayName: Publish
