@@ -15,7 +15,7 @@ variables:
   resource-group: 'AZ400-EWebShop-danasoft'
   location: 'northeurope'
   templateFile: 'infra/acr.bicep'
-  azureserviceconnection: 'azure subs'
+  azureserviceconnection: 'Azure subscription 1 (abcc12e8-46f6-4fb0-ae1f-86a92dafdaa7)'
   subscriptionId: 'abcc12e8-46f6-4fb0-ae1f-86a92dafdaa7'
 
 stages:
