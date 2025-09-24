@@ -1,5 +1,3 @@
-#NAME THE PIPELINE SAME AS FILE (WITHOUT ".yml")
-
 # trigger: none
 resources:
   pipelines:
@@ -11,14 +9,14 @@ resources:
       trigger: none
 
 variables:
-  location: 'centralus'
+  location: 'northeurope'
   templateFile: 'infra/aci.bicep'
-  subscriptionid: 'YOUR-SUBSCRIPTION-ID'
-  azureserviceconnection: 'azure subs'
-  webappname: 'az400eshop-NAME'
-  acr-login-server: 'YOUR-ACR.azurecr.io'
-  acr-username: 'ACR-USERNAME'
-  resource-group: 'AZ400-EWebShop-NAME' 
+  subscriptionid: 'abcc12e8-46f6-4fb0-ae1f-86a92dafdaa7'
+  azureserviceconnection: 'Azure subscription 1 (abcc12e8-46f6-4fb0-ae1f-86a92dafdaa7)'
+  webappname: 'az400eshop-danasoft'
+  acr-login-server: 'crs76mr33rynqts.azurecr.io'
+  acr-username: 'crs76mr33rynqts'
+  resource-group: 'AZ400-EWebShop-danasoft' 
 
 
 stages:
