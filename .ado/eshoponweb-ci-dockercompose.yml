@@ -1,5 +1,3 @@
-#NAME THE PIPELINE SAME AS FILE (WITHOUT ".yml")
-
 # Docker
 # Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
@@ -14,11 +12,11 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
-  resource-group: 'AZ400-EWebShop-NAME'
-  location: 'centralus'
+  resource-group: 'AZ400-EWebShop-danasoft'
+  location: 'northeurope'
   templateFile: 'infra/acr.bicep'
   azureserviceconnection: 'azure subs'
-  subscriptionId: 'YOUR-SUBSCRIPTION-ID'
+  subscriptionId: 'abcc12e8-46f6-4fb0-ae1f-86a92dafdaa7'
 
 stages:
 - stage: Build
