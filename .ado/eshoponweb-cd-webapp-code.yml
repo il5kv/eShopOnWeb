@@ -1,5 +1,3 @@
-#NAME THE PIPELINE SAME AS FILE (WITHOUT ".yml")
-
 # Trigger CD when CI executed succesfully
 resources:
   pipelines:
@@ -9,12 +7,12 @@ resources:
 
 
 variables:
-  resource-group: 'AZ400-EWebShop-NAME'
-  location: 'centralus'
+  resource-group: 'AZ400-EWebShop-danasoft'
+  location: 'northeurope'
   templateFile: 'webapp.bicep'
-  subscriptionid: 'YOUR-SUBSCRIPTION-ID'
-  azureserviceconnection: 'azure subs'
-  webappname: 'az400-webapp-NAME'
+  subscriptionid: 'abcc12e8-46f6-4fb0-ae1f-86a92dafdaa7'
+  azureserviceconnection: 'azure mysubs'
+  webappname: 'az400-webapp-danasoft'
   # webappname: 'webapp-windows-eshop'
   
 
@@ -24,7 +22,8 @@ stages:
   jobs:
   - job: Deploy
     pool:
-      vmImage: windows-latest
+      name: eShopOnWebSelfPool
+      demands: Agent.Name -equals eShopOnWebSelfAgent
     steps:
     #download artifacts
     - download: eshoponweb-ci
