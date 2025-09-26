@@ -16,8 +16,8 @@ jobs:
             - name: deploy
               uses: azure/arm-deploy@v1
               with:
-                  subscriptionId: 'abcc12e8-46f6-4fb0-ae1f-86a92dafdaa7'
-                  resourceGroupName: 'Bicep'
-                  template: /infra/main2.bicep
+                  subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+                  resourceGroupName: ${{ secrets.AZURE_RG }}
+                  template: infra/main2.bicep
                   parameters: storagePrefix=stg
                   failOnStdErr: false
