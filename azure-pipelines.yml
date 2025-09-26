@@ -9,7 +9,7 @@ variables:
     azureServiceConnection: 'azure mysubs'
     resourceGroupName: 'Bicep'
     location: 'northeurope'
-    templateFile: 'main2.bicep'
+    templateFile: 'infra/main2.bicep'
 pool:
     vmImage: $(vmImageName)
 
